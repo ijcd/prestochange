@@ -1,41 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Hello PrestoChange!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
+  <title>Hello PrestoChange!</title>
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+</head>
 
-  <body>
-    <div class="uk-alert-danger" uk-alert>
-      <a class="uk-alert-close" uk-close></a>
-      <h3>Notice</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
+<body>
 
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+  <header id="header">
+    <nav id="nav" class="uk-navbar-container" uk-navbar uk-flex .uk-flex-middle>
+      <section id="nav_left">
+        <h1 id="logo">
+          <a href="/">
+            <span uk-icon="icon: nut; ratio: 4"></span>
+            <span>PrestoChange.io</span>
+          </a>
+        </h1>
+      </section>
+        
+      <section id="nav_center">
+      </section>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <section id="nav_right">
+      </section>            
+    </nav>
+  </header>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+  <%
+    info = get_flash(@conn, :info)
+    error = get_flash(@conn, :error)
+  %>
 
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  </body>
+  <%= if info do %>
+  <section class="info" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <%= info %>
+  </section>
+  <% end %>
+
+  <%= if error do %>
+  <section class="error" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <%= error %>
+  </section>
+  <% end %>
+
+  <main>
+    <%= render @view_module, @view_template, assigns %>
+  </main>
+
+  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+</body>
 </html>

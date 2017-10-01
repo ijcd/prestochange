@@ -50,7 +50,7 @@ exports.config = {
     },
     sass: {
       options: {
-        includePaths: ["node_modules/uikit/src/scss"]
+        includePaths: ["node_modules"]
       }
     }    
   },

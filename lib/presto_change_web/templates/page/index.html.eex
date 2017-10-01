@@ -1,36 +1,52 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
+<form>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
+  <section id="controls">    
+    <div class="uk-grid-collapse uk-grid" uk-grid>
+      <div class="uk-width-1-2">
+        Type or paste HTML here
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
-</div>
+        <!--   <select class="uk-select"> -->
+        <!--     <option>HTML to Taggart</option> -->
+        <!--     <option>HTML to Elm</option> -->
+        <!--     <option>HTML to Jade</option> -->
+        <!--     <option>HTML to Slim</option> -->
+        <!--     <option>HTML to Haml</option> -->
+        <!--   </select> -->
+
+      </div>
+      <div class="uk-width-1-2">
+        Converted output will appear here
+      </div>
+    </div>
+  </section>
+
+  <section id="code" uk-height-viewport="expand: true">
+    <div class="uk-grid-collapse uk-grid" uk-grid>
+      <div class="uk-width-1-2">
+        <textarea name="input" class="uk-height-1-1"></textarea>
+      </div>
+      <div class="uk-width-1-2">
+        <textarea name="output" class="uk-height-1-1"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section id="helpers" class="uk-section-primary">
+    <div class="uk-grid-collapse uk-grid" uk-grid>
+      <div class="uk-width-1-2">
+        Snippets:
+        <button class="uk-button uk-button-secondary">a</button>
+        <button class="uk-button uk-button-secondary">bootstrap navbar</button>
+        <button class="uk-button uk-button-secondary">hello world</button>
+        <button class="uk-button uk-button-secondary">ul</button>
+        <button class="uk-button uk-button-secondary">zurb topbar</button>
+      </div>
+      <div class="uk-width-1-2">
+        Indent spaces:
+        <button class="uk-button uk-button-secondary">2</button>
+        <button class="uk-button uk-button-secondary">4</button>
+      </div>
+    </div>
+  </section>
+
+</form>

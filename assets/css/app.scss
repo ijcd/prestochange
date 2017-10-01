@@ -1,3 +1,127 @@
-@import "variables-theme";
-@import "mixins-theme";
-@import "uikit-theme";
+/////////////////
+// Theme Colors
+/////////////////
+
+// black and white
+$color_black: rgb(0, 0, 0);
+$color_white: rgb(255, 255, 255);
+
+// greens
+$color_darker_green: rgb(22, 160, 133);
+$color_lighter_green: rgb(26, 188, 156);
+$color_highlight_green: rgb(141, 203, 137);
+
+// purple
+$color_highlight_purple: rgb(103, 18, 143);
+
+//fonts
+$font_0: Questrial;
+$font_1: sans-serif;
+
+///////////////////////
+// Variable Overrides
+///////////////////////
+// $global-font-family: $font_0, $font_1;
+
+// $global-muted-background: $color_darker_green;
+// $global-primary-background: $color_highlight_green;
+// $global-secondary-background: $color_highlight_purple;
+
+// $inverse-global-color: rgba($color_white, 0.9);
+// // $inverse-global-color-mode: none;
+
+// $button_color: rgba($color_highlight_purple, 0.5);
+
+// $section-muted-color-mode: dark;
+
+//////////////////////////
+// UIKit Vars and Mixins
+//////////////////////////
+
+@import "uikit/src/scss/variables.scss";
+@import "uikit/src/scss/mixins.scss";
+
+///////////////////
+// Hook Overrides
+///////////////////
+
+@mixin hook-section-secondary() {
+}
+
+@mixin hook-button() {
+  @extend .uk-border-rounded;
+
+  // background-color: $button_color;
+
+  // &:hover {
+  //   background-color: lighten($button_color, 15%);
+  // }
+}
+
+/////////////////
+// Import UIKit
+/////////////////
+
+@import "uikit/src/scss/uikit.scss";
+
+///////////////
+// Custom CSS
+///////////////
+
+#header {
+  @extend .uk-text-middle;
+
+
+  #nav {
+    padding: 10px;
+    
+    #logo {
+      margin: 0px;
+
+      a {
+        @extend .uk-link-reset
+      }
+    }
+
+    #nav_left {
+      @extend .uk-navbar-left;
+    }
+
+    #nav_center {
+      @extend .uk-navbar-center;
+    }
+
+    #nav_right {
+      @extend .uk-navbar-right;
+    }
+  }
+}
+
+[uk-alert] {
+
+  a {
+    @extend .uk-alert-close;
+  }
+
+  &.info {
+    @extend .uk-alert-success;
+  }
+
+  &.error {
+    @extend .uk-alert-danger
+  }
+}
+
+#controls {
+  @extend .uk-section-primary;
+}
+
+#helpers {
+  @extend .uk-section-primary;
+  padding: 4px;
+
+  button {
+    @extend .uk-button-small;
+    @extend .uk-button-secondary;    
+  }    
+}
