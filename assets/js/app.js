@@ -20,5 +20,25 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
-
 uikit.use(icons);
+
+// setup editor
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setMode("ace/mode/html");
+
+editor.getSession().on('change', function(e) {
+  console.log(e);
+});
+
+editor.getSession().selection.on('changeSelection', function(e) {
+  console.log(e);
+});
+
+editor.getSession().selection.on('changeCursor', function(e) {
+  console.log(e);
+});
+
+// $(window).resize(function() {
+//   editor.resize();
+// })

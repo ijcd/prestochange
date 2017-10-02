@@ -21,11 +21,13 @@
   </section>
 
   <section id="code" uk-height-viewport="expand: true">
-    <div class="uk-grid-collapse uk-grid" uk-grid>
+    <div class="uk-grid-collapse uk-grid uk-height-1-1" uk-grid>
       <div class="uk-width-1-2">
-        <textarea name="input" class="uk-height-1-1"></textarea>
+        <div id="editor" class="uk-height-1-1">
+        </div>
       </div>
-      <div class="uk-width-1-2">
+
+      <div class="uk-width-1-2 uk-height-1-1">
         <textarea name="output" class="uk-height-1-1"></textarea>
       </div>
     </div>
