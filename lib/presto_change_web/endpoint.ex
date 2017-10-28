@@ -1,5 +1,5 @@
 defmodule PrestoChangeWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :prestochange
+  use Phoenix.Endpoint, otp_app: :presto_change
 
   socket "/socket", PrestoChangeWeb.UserSocket
 
@@ -8,7 +8,7 @@ defmodule PrestoChangeWeb.Endpoint do
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :prestochange, gzip: false,
+    at: "/", from: :presto_change, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -35,7 +35,7 @@ defmodule PrestoChangeWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_prestochange_key",
+    key: "_presto_change_key",
     signing_salt: "zhaHdufk"
 
   plug PrestoChangeWeb.Router

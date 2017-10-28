@@ -6,7 +6,7 @@
 use Mix.Config
 
 # Configures the endpoint
-config :prestochange, PrestoChangeWeb.Endpoint,
+config :presto_change, PrestoChangeWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "FW9DFmvhO/gnLQbZwANS8QCTuVOlRkjGYztPpueJRZqknPqmZnPMRDchSHiRJN4m",
   render_errors: [view: PrestoChangeWeb.ErrorView, accepts: ~w(html json)],

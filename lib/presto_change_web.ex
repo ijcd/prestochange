@@ -28,14 +28,14 @@ defmodule PrestoChangeWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/prestochange_web/templates",
+      use Phoenix.View, root: "lib/presto_change_web/templates",
                         namespace: PrestoChangeWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
+      # use Phoenix.HTML
 
       import PrestoChangeWeb.Router.Helpers
       import PrestoChangeWeb.ErrorHelpers

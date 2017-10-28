@@ -28,7 +28,7 @@ $font_1: sans-serif;
 // $global-secondary-background: $color_highlight_purple;
 
 // $inverse-global-color: rgba($color_white, 0.9);
-// // $inverse-global-color-mode: none;
+// $inverse-global-color-mode: none;
 
 // $button_color: rgba($color_highlight_purple, 0.5);
 
@@ -51,11 +51,15 @@ $font_1: sans-serif;
 @mixin hook-button() {
   @extend .uk-border-rounded;
 
-  // background-color: $button_color;
+  $button_color: rgb(255, 0, 0);
 
-  // &:hover {
-  //   background-color: lighten($button_color, 15%);
-  // }
+  .uk-light {
+    background-color: $button_color;
+  }
+
+  &:hover {
+    background-color: lighten($button_color, 15%);
+  }
 }
 
 /////////////////
@@ -117,11 +121,13 @@ $font_1: sans-serif;
 }
 
 #helpers {
-  @extend .uk-section-primary;
   padding: 4px;
 
   button {
-    @extend .uk-button-small;
-    @extend .uk-button-secondary;    
+    margin-left: 5px;
+
+    &.active {
+      background-color: $color_black;
+    }
   }    
 }

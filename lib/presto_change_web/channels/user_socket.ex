@@ -3,7 +3,8 @@ defmodule PrestoChangeWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PrestoChangeWeb.RoomChannel
-
+  channel "page:*", PrestoChangeWeb.PageChannel
+  
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll
@@ -19,7 +20,7 @@ defmodule PrestoChangeWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
+  def connect(params, socket) do
     {:ok, socket}
   end
 

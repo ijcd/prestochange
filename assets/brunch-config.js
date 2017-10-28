@@ -20,7 +20,11 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      // joinTo: "css/app.css"
+      joinTo: {
+        "css/app.css": /^css/,
+        "css/vendor.css": /^(?!css)/
+      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -65,8 +69,13 @@ exports.config = {
     enabled: true,
     globals: {
       $: "jquery",
+      jQuery: "jquery",      
+      // unpoly: "unpoly",
       uikit: "uikit",
       icons: "uikit/dist/js/uikit-icons",
-    }    
+    },
+    styles: {
+      unpoly: ["dist/unpoly.css"]
+    }
   }
 };
