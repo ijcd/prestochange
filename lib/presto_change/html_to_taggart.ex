@@ -4,14 +4,16 @@ defmodule PrestoChange.HTMLToTaggart do
 
   alias Inspect.Algebra, as: IA
 
-  def html_to_taggart(html, indent \\ 2, width \\ 1000) do
+  @spec html_to_taggart(String.t, String.t, non_neg_integer()) :: String.t
+  def html_to_taggart(html, indent \\ "  ", width \\ 1000) do
     html
     |> Floki.parse()
-    |> to_taggart(indent)
+    |> to_taggart(1)
     |> IA.format(width)
     |> Enum.join
+    |> adjust_indent(indent)
   end
-  
+
   defp to_taggart({tag, attrs, body}, indent) do
     call =
       case attrs do
@@ -61,5 +63,14 @@ defmodule PrestoChange.HTMLToTaggart do
   defp attr_doc({attr, value}) do
     a = "#{attr}" |> String.to_atom |> Atom.to_string
     IA.glue(a, ": ", inspect(value))
+  end
+
+  defp adjust_indent(str, indent) do
+    str
+    |> String.split("\n")
+    |> Enum.map(fn s ->
+      String.replace_leading(s, " ", indent)
+    end)
+    |> Enum.join("\n")
   end
 end

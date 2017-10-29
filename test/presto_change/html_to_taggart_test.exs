@@ -40,13 +40,18 @@ html do
 end
 """ |> String.trim
 
-  @taggart_4 String.replace(@taggart, "  ", "    ")
+  @taggart_4sp String.replace(@taggart, "  ", "    ")
+  @taggart_tab String.replace(@taggart, "  ", "\t")  
 
   test "converts html to taggart" do
     assert @taggart == HTMLToTaggart.html_to_taggart(@html)
   end
 
-  test "converts html to taggart with indentation" do
-    assert @taggart_4 == HTMLToTaggart.html_to_taggart(@html, 4)
+  test "converts html to taggart with 4 space indentation" do
+    assert @taggart_4sp == HTMLToTaggart.html_to_taggart(@html, "    ")
+  end
+
+  test "converts html to taggart with tab indentation" do
+    assert @taggart_tab == HTMLToTaggart.html_to_taggart(@html, "\t")
   end
 end
