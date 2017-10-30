@@ -1,5 +1,5 @@
 defmodule PrestoChange.Converter do
-  alias PrestoChange.HTMLToTaggart
+  alias PrestoChange.Converter.HTMLToTaggart
   alias PrestoChange.Snippets
 
   import Algae
@@ -39,37 +39,3 @@ defmodule PrestoChange.Converter do
   end  
 end
 
-# ps = ps |> Converter.set_snippet(:a)
-# assert ps.input == Snippets.a
-
-# ps = ps |> Converter.set_snippet(:ul)
-# assert ps.input == Snippets.ul
-
-# ps = ps |> Converter.set_snippet(:hello)
-# assert ps.input == Snippets.hello
-
-# ps = ps |> Converter.set_snippet(:bootstrap)
-# assert ps.input == Snippets.bootstrap_navbar
-
-# ps = ps |> Converter.set_snippet(:zurb)
-# assert ps.input == Snippets.zurb_topbar
-
-# def button(id: "a") do
-#   %{"snippet" => Snippets.a}
-# end
-
-# def button(id: "ul") do
-#   %{"snippet" => Snippets.ul}
-# end
-
-# def button(id: "hello") do
-#   %{"snippet" => Snippets.hello}
-# end
-
-# def button(id: "bootstrap") do
-#   %{"snippet" => Snippets.bootstrap_navbar}
-# end
-
-# def button(id: "zurb") do
-#   %{"snippet" => Snippets.zurb_topbar}
-# end

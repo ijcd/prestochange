@@ -1,4 +1,4 @@
-defmodule PrestoChange.HTMLToTaggart do
+defmodule PrestoChange.Converter.HTMLToTaggart do
   use Taggart.HTML
   import Phoenix.HTML.Format
 

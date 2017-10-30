@@ -59,8 +59,9 @@ defmodule PrestoChangeWeb.PageView do
 
         div(class: "uk-width-1-2") do
           "Indent spaces:"
-          button(2, class: "uk-button uk-button-small uk-button-secondary active")
-          button(4, class: "uk-button uk-button-small uk-button-secondary")
+          button(2, id: "spaces_2", class: "uk-button uk-button-small uk-button-secondary active")
+          button(4, id: "spaces_4", class: "uk-button uk-button-small uk-button-secondary")
+          button("tabs", id: "tabs", class: "uk-button uk-button-small uk-button-secondary")          
         end
       end
     end

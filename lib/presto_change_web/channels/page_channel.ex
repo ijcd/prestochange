@@ -1,7 +1,7 @@
 defmodule PrestoChangeWeb.PageChannel do
   use PrestoChangeWeb, :channel
-  alias PrestoChange.Converter
-
+  alias PrestoChangeWeb.ConverterSPA
+  alias PrestoWeb.Session
 
   def join("page:lobby", payload, socket) do
     if authorized?(payload) do
@@ -14,7 +14,7 @@ defmodule PrestoChangeWeb.PageChannel do
   def handle_in("button", payload, socket) do
     %{"attrs" => %{"id" => id}} = payload
 
-    case Converter.button(id: id) do
+    case ConverterSPA.button(id: id) do
       nil -> nil
       rv -> push socket, "snippet", rv
     end

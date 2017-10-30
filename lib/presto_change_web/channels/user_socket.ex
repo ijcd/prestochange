@@ -1,5 +1,6 @@
 defmodule PrestoChangeWeb.UserSocket do
   use Phoenix.Socket
+  alias PrestoChange.Session
 
   ## Channels
   # channel "room:*", PrestoChangeWeb.RoomChannel
@@ -20,8 +21,13 @@ defmodule PrestoChangeWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(params, socket) do
-    {:ok, socket}
+  def connect(%{"token" => token} = _params, socket) do
+    case Session.decode_socket_token(token) do
+      {:ok, visitor_id} ->
+        {:ok, assign(socket, :visitor_id, visitor_id)}
+      {:error, reason} ->
+        :error
+    end
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

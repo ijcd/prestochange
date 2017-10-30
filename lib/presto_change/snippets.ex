@@ -1,5 +1,4 @@
 defmodule PrestoChange.Snippets do
-
   def a do
     ~s|<a href="">link text</a>|
   end

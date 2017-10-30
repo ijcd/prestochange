@@ -1,6 +1,6 @@
 defmodule PrestoChange.HTMLToTaggartTest do
   use ExUnit.Case
-  alias PrestoChange.HTMLToTaggart
+  alias PrestoChange.Converter.HTMLToTaggart
 
   @html """
 <html>
