@@ -2,26 +2,26 @@ defmodule PrestoChangeWeb.ConverterSPA do
   alias PrestoChange.Snippets
 
   def button(id: "a") do
-    %{"snippet" => Snippets.a}
+    %{action: "snippet", data: Snippets.a}
   end
 
   def button(id: "ul") do
-    %{"snippet" => Snippets.ul}
+    %{action: "snippet", data: Snippets.ul}
   end
 
   def button(id: "hello") do
-    %{"snippet" => Snippets.hello}
+    %{action: "snippet", data: Snippets.hello}
   end
 
   def button(id: "bootstrap") do
-    %{"snippet" => Snippets.bootstrap_navbar}
+    %{action: "snippet", data: Snippets.bootstrap_navbar}
   end
 
   def button(id: "zurb") do
-    %{"snippet" => Snippets.zurb_topbar}
+    %{action: "snippet", data: Snippets.zurb_topbar}
   end
 
   def button(id) do
-    %{"snippet" => inspect(id)}
+    %{action: "snippet", data: inspect(id)}
   end
 end

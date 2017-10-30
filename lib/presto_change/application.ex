@@ -12,6 +12,9 @@ defmodule PrestoChange.Application do
       supervisor(PrestoChangeWeb.Endpoint, []),
       # Start your own worker by calling: PrestoChange.Worker.start_link(arg1, arg2, arg3)
       # worker(PrestoChange.Worker, [arg1, arg2, arg3]),
+
+      {Registry, keys: :unique, name: Registry.Presto.Page},
+      Presto.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

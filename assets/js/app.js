@@ -90,7 +90,7 @@ up.compiler('button', function($button) {
 
     $button = $(event.target);
 
-    channel.push("button", {
+    channel.push("presto", {
       event: "click",
       element: "button",
       attrs: $button.attr(),
@@ -99,8 +99,16 @@ up.compiler('button', function($button) {
   });
 });
 
-channel.on("snippet", payload => {
-  console.log("SNIPPET", payload);
-  editor.setValue(payload.snippet, -1) // moves cursor to the start
-  // editor.setValue(str, 1) // moves cursor to the end  
+channel.on("presto", payload => {
+  var {action, data} = payload;
+
+  switch (action) {
+    case "snippet": {
+      editor.setValue(data, -1); // moves cursor to the start
+      break;
+    }
+    default: {
+      console.log("Unknown payload", payload);
+    }
+  }
 });

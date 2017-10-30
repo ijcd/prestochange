@@ -1,22 +1,26 @@
 defmodule PrestoChangeWeb.PageChannel do
   use PrestoChangeWeb, :channel
-  alias PrestoChangeWeb.ConverterSPA
   alias PrestoWeb.Session
 
   def join("page:lobby", payload, socket) do
+    %{visitor_id: visitor_id} = socket.assigns
+
     if authorized?(payload) do
+      Presto.Supervisor.find_or_create_process(visitor_id)
+
       {:ok, socket}
     else
       {:error, %{reason: "unauthorized"}}
     end
   end
 
-  def handle_in("button", payload, socket) do
-    %{"attrs" => %{"id" => id}} = payload
+  def handle_in("presto", payload, socket) do
+    %{visitor_id: visitor_id} = socket.assigns
 
-    case ConverterSPA.button(id: id) do
+    # send event to presto page
+    case Presto.Page.page_event(visitor_id, payload) do
       nil -> nil
-      rv -> push socket, "snippet", rv
+      rv -> push(socket, "presto", rv |> IO.inspect(label: "REPLY"))
     end
 
     {:reply, {:ok, payload}, socket}
