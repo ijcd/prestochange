@@ -131,3 +131,22 @@ $font_1: sans-serif;
     }
   }    
 }
+
+.copy-button {
+    width: 75px;
+    height: 40px;
+    position: absolute;
+    top: 140px;
+    right: 20px;
+    background-color: #7FD13B;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#code-panel {
+  background: #F0F0F0;
+}

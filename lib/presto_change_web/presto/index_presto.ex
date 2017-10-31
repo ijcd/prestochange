@@ -99,12 +99,16 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
           end
         end
 
-        div(class: "uk-width-1-2 uk-height-1-1") do
-          div(id: "output", class: "uk-height-1-1") do
+        div(id: "code-panel", class: "uk-width-1-2 uk-height-1-1") do
+          div(class: "uk-height-1-1") do
             pre(class: "uk-scrollable-text") do
-              code(class: "elixir") do
+              code(id: "output", class: "elixir") do
                 state.output
               end
+            end
+            button(id: "clipboard", class: "copy-button", "data-clipboard-target": "#output") do
+              "Copy"
+              # <img src="assets/clippy.svg" alt="Copy to clipboard">
             end
           end
         end
@@ -117,18 +121,18 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
       div(class: "uk-grid-collapse uk-grid", "uk-grid": true) do
         div(class: "uk-width-1-2") do
           "Snippets:"
-          button("a", id: "a", class: "uk-button uk-button-small uk-button-secondary")
-          button("ul", id: "ul", class: "uk-button uk-button-small uk-button-secondary")
-          button("hello world", id: "hello", class: "uk-button uk-button-small uk-button-secondary")
-          button("bootstrap navbar", id: "bootstrap", class: "uk-button uk-button-small uk-button-secondary")
-          button("zurb topbar", id: "zurb", class: "uk-button uk-button-small uk-button-secondary")
+          button("a", id: "a", class: "uk-button uk-button-small uk-button-secondary", presto: true)
+          button("ul", id: "ul", class: "uk-button uk-button-small uk-button-secondary", presto: true)
+          button("hello world", id: "hello", class: "uk-button uk-button-small uk-button-secondary", presto: true)
+          button("bootstrap navbar", id: "bootstrap", class: "uk-button uk-button-small uk-button-secondary", presto: true)
+          button("zurb topbar", id: "zurb", class: "uk-button uk-button-small uk-button-secondary", presto: true)
         end
 
         div(class: "uk-width-1-2") do
           "Indent spaces:"
-          button(2, id: "spaces_2", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_2))
-          button(4, id: "spaces_4", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_4))
-          button("tabs", id: "tabs", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_t))
+          button(2, id: "spaces_2", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_2), presto: true)
+          button(4, id: "spaces_4", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_4), presto: true)
+          button("tabs", id: "tabs", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_t), presto: true)
         end
       end
     end

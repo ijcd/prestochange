@@ -77,6 +77,22 @@ up.compiler("pre code", function ($blocks) {
 //   // hljs.highlightBlock($element);
 // });
 
+//////////////////////////////////
+// Setup clipboard
+//////////////////////////////////
+
+import Clipboard from "clipboard";
+
+var clipboard = new Clipboard('button#clipboard');
+
+clipboard.on('success', function(e) {
+    // console.info('Action:', e.action);
+    // console.info('Text:', e.text);
+    // console.info('Trigger:', e.trigger);
+
+  setTimeout( () => e.clearSelection(), 200 );
+});
+
 
 //////////////////////////////////
 // Setup Editor
@@ -111,7 +127,7 @@ up.on('up:fragment:keet', function(event) {
   console.log("kept", event);
 });
 
-up.compiler('button', function($button) {
+up.compiler('button[presto]', function($button) {
   $button.on('click', function(event) {
     event.preventDefault();
 
