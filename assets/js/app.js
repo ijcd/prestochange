@@ -84,6 +84,14 @@ editor.getSession().selection.on('changeCursor', function(e) {
 // Setup Proactive callbacks
 //////////////////////////////////
 
+up.on('up:fragment:keep', function(event) {
+  console.log("keep", event);
+});
+
+up.on('up:fragment:keet', function(event) {
+  console.log("kept", event);
+});
+
 up.compiler('button', function($button) {
   $button.on('click', function(event) {
     event.preventDefault();
@@ -99,16 +107,39 @@ up.compiler('button', function($button) {
   });
 });
 
-channel.on("presto", payload => {
-  var {action, data} = payload;
+function applyPresto(message) {
+  var {action, data} = message;
 
   switch (action) {
-    case "snippet": {
+    case "extract": {
+      var {selector, html} = data;
+      up.extract(selector, html);
+      break;
+    }
+    default: {
+      console.log("Unknown message", message);
+    }
+  }
+}
+
+function applyEditor(message) {
+  var {action, data} = message;
+
+  switch (action) {
+    case "update_editor": {
       editor.setValue(data, -1); // moves cursor to the start
       break;
     }
     default: {
-      console.log("Unknown payload", payload);
+      console.log("Unknown message", message);
     }
   }
+}
+
+channel.on("presto", payload => {
+  var {presto: presto_actions = []} = payload;
+  presto_actions.map(p => applyPresto(p));
+
+  var {editor: editor_actions = []} = payload;  
+  editor_actions.map(p => applyEditor(p));  
 });

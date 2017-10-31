@@ -2,6 +2,7 @@ defmodule PrestoChangeWeb.PageChannel do
   use PrestoChangeWeb, :channel
   alias PrestoWeb.Session
 
+  # TODO: turn these into a use macro that pulls this into the channel easily
   def join("page:lobby", payload, socket) do
     %{visitor_id: visitor_id} = socket.assigns
 
@@ -14,13 +15,14 @@ defmodule PrestoChangeWeb.PageChannel do
     end
   end
 
+  # TODO: turn these into a use macro that pulls this into the channel  easily
   def handle_in("presto", payload, socket) do
     %{visitor_id: visitor_id} = socket.assigns
 
     # send event to presto page
     case Presto.Page.page_event(visitor_id, payload) do
       nil -> nil
-      rv -> push(socket, "presto", rv |> IO.inspect(label: "REPLY"))
+      rv -> push(socket, "presto", rv |> IO.inspect(label: "RV"))
     end
 
     {:reply, {:ok, payload}, socket}

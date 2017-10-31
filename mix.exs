@@ -40,7 +40,7 @@ defmodule PrestoChange.Mixfile do
       {:cowboy, "~> 1.0"},
       {:algae, "~> 1.1"},      
 
-      {:taggart, path: "~/work/ijcd/taggart"},
+      {:taggart, github: "ijcd/taggart", branch: "ijcd-content_tag_as_macro"},
       {:floki, "~> 0.17.0"},
 
       {:mix_test_watch, "~> 0.2", only: :dev},
