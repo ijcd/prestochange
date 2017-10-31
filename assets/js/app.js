@@ -60,6 +60,25 @@ uikit.use(icons);
 
 
 //////////////////////////////////
+// Setup highlight.js
+//////////////////////////////////
+
+import hljs from "highlight.js";
+
+up.compiler("pre code", function ($blocks) {
+  $blocks.each(function(i, block) {
+    hljs.highlightBlock(block);
+  })
+});
+
+
+//   console.log($element);
+//   // $.each($elements, e => console.log("HIGHLIGHT", e));
+//   // hljs.highlightBlock($element);
+// });
+
+
+//////////////////////////////////
 // Setup Editor
 //////////////////////////////////
 

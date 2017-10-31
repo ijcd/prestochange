@@ -22,7 +22,7 @@ defmodule PrestoChangeWeb.PageChannel do
     # send event to presto page
     case Presto.Page.page_event(visitor_id, payload) do
       nil -> nil
-      rv -> push(socket, "presto", rv |> IO.inspect(label: "RV"))
+      rv -> push(socket, "presto", rv)
     end
 
     {:reply, {:ok, payload}, socket}

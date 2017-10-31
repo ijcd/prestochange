@@ -72,7 +72,7 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
 
   def render_controls(state) do
     section(id: "controls") do
-      div(class: "uk-grid-collapse uk-grid", "uk-grid": 1) do
+      div(class: "uk-grid-collapse uk-grid", "uk-grid": true) do
         div(class: "uk-width-1-2") do
           "Type or paste HTML here"
           # <select class="uk-select">
@@ -92,7 +92,7 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
 
   def render_workspace(state) do
     section(id: "code", "uk-height-viewport": "expand: true") do
-      div(class: "uk-grid-collapse uk-grid uk-height-1-1", "uk-grid": 1) do
+      div(class: "uk-grid-collapse uk-grid uk-height-1-1", "uk-grid": true) do
         div(class: "uk-width-1-2") do
           div(id: "editor", class: "uk-height-1-1", "up-keep": true) do
             state.input
@@ -101,10 +101,10 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
 
         div(class: "uk-width-1-2 uk-height-1-1") do
           div(id: "output", class: "uk-height-1-1") do
-            pre(class: "uk-height-1-1") do
-              # code do
+            pre(class: "uk-scrollable-text") do
+              code(class: "elixir") do
                 state.output
-              # end
+              end
             end
           end
         end
@@ -114,7 +114,7 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
 
   def render_helpers(state) do
     section(id: "helpers", class: "uk-section-primary") do
-      div(class: "uk-grid-collapse uk-grid", "uk-grid": 1) do
+      div(class: "uk-grid-collapse uk-grid", "uk-grid": true) do
         div(class: "uk-width-1-2") do
           "Snippets:"
           button("a", id: "a", class: "uk-button uk-button-small uk-button-secondary")

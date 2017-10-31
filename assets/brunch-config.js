@@ -69,13 +69,13 @@ exports.config = {
     enabled: true,
     globals: {
       $: "jquery",
-      jQuery: "jquery",      
-      // unpoly: "unpoly",
+      jQuery: "jquery",
       uikit: "uikit",
       icons: "uikit/dist/js/uikit-icons",
     },
     styles: {
-      unpoly: ["dist/unpoly.css"]
+      unpoly: ["dist/unpoly.css"],
+      "highlight.js": ["styles/default.css"]
     }
   }
 };
