@@ -76,7 +76,7 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
   end
 
   def render_page(state) do
-    div(id: "converter") do
+    div(id: "converter", "uk-height-viewport": "expand: true") do
       render_controls(state)
       render_workspace(state)
       render_helpers(state)
@@ -104,25 +104,26 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
   end
 
   def render_workspace(state) do
-    section(id: "code", "uk-height-viewport": "expand: true") do
+    section(id: "code", class: "uk-height-1-1") do
       div(class: "uk-grid-collapse uk-grid uk-height-1-1", "uk-grid": true) do
+
+        # left panel
         div(class: "uk-width-1-2") do
           div(id: "editor", class: "uk-height-1-1", "up-keep": true) do
             state.input
           end
         end
 
-        div(id: "code-panel", class: "uk-width-1-2 uk-height-1-1") do
-          div(class: "uk-height-1-1") do
-            pre(class: "uk-scrollable-text") do
-              code(id: "output", class: "elixir") do
-                state.output
-              end
-            end
-            button(id: "clipboard", class: "copy-button", "data-clipboard-target": "#output") do
-              "Copy"
+        # right panel
+        div(id: "code-panel", class: "uk-width-1-2", style: "overflow: auto") do
+          pre do
+            code(id: "output", class: "elixir") do
+              state.output
             end
           end
+          # button(id: "clipboard", class: "copy-button", "data-clipboard-target": "#output") do
+          #   "Copy"
+          # end
         end
       end
     end

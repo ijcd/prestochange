@@ -45,6 +45,19 @@ import {socket, channel} from "./socket"
   };
 })($.fn.attr);
 
+function setCodeHeight() {
+  var window_height = $(window).height();
+  var header_height = $("#header").height();
+  var controls_height = $("#controls").height();
+  var helpers_height = $("#helpers").height();
+  
+  $("#code").height(window_height - header_height - controls_height - helpers_height - 8);
+}
+
+$(document).ready(function() {
+  $(window).resize(setCodeHeight);
+  setCodeHeight();
+});
 
 //////////////////////////////////
 // Setup Unpoly
@@ -159,6 +172,8 @@ function applyPresto(message) {
       console.log("Unknown message", message);
     }
   }
+
+  setCodeHeight();
 }
 
 function applyEditor(message) {
