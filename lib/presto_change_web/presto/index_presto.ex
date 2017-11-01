@@ -18,22 +18,35 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
   end
 
   def handle_event(event, state) do
-    state =
+    {state, update_input} =
       case event do
         %{"element" => "button", "event" => "click", "attrs" => %{"id" => id}} = e ->
           case id do
-            "a" -> Converter.update_input(state, Snippets.a)
-            "ul" -> Converter.update_input(state, Snippets.ul)
-            "hello" -> Converter.update_input(state, Snippets.hello)
-            "bootstrap" -> Converter.update_input(state, Snippets.bootstrap_navbar)
-            "zurb" -> Converter.update_input(state, Snippets.zurb_topbar)
+            "a" ->
+              {Converter.update_input(state, Snippets.a), true}
+            "ul" ->
+              {Converter.update_input(state, Snippets.ul), true}
+            "hello" ->
+              {Converter.update_input(state, Snippets.hello), true}
+            "bootstrap" ->
+              {Converter.update_input(state, Snippets.bootstrap_navbar), true}
+            "zurb" ->
+              {Converter.update_input(state, Snippets.zurb_topbar), true}
 
-            "spaces_2" -> Converter.update_indent(state, @indent_2)
-            "spaces_4" -> Converter.update_indent(state, @indent_4)
-            "tabs" -> Converter.update_indent(state, @indent_t)
+            "spaces_2" ->
+              {Converter.update_indent(state, @indent_2), true}
+            "spaces_4" ->
+              {Converter.update_indent(state, @indent_4), true}
+            "tabs" ->
+              {Converter.update_indent(state, @indent_t), true}
 
-            _ -> Converter.update_input(state, inspect(id))
+            _ ->
+              Logger.warn("Unknown button in #{__MODULE__}: #{inspect(event)}")
+              {state, false}
           end
+
+        %{"event" => "editor_changed", "content" => content} = e ->
+          {Converter.update_input(state, content), false}
 
         _ ->
           Logger.warn("Unknown event in #{__MODULE__}: #{inspect(event)}")
@@ -108,7 +121,6 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
             end
             button(id: "clipboard", class: "copy-button", "data-clipboard-target": "#output") do
               "Copy"
-              # <img src="assets/clippy.svg" alt="Copy to clipboard">
             end
           end
         end
@@ -117,7 +129,7 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
   end
 
   def render_helpers(state) do
-    section(id: "helpers", class: "uk-section-primary") do
+    section(id: "helpers", class: "uk-section-primary", "uk-sticky": "bottom: true") do
       div(class: "uk-grid-collapse uk-grid", "uk-grid": true) do
         div(class: "uk-width-1-2") do
           "Snippets:"

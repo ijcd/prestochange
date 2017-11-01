@@ -20,6 +20,7 @@ import "phoenix_html"
 
 import {socket, channel} from "./socket"
 
+
 //////////////////////////////////
 // Extend jQuery with attr()
 //////////////////////////////////
@@ -43,6 +44,7 @@ import {socket, channel} from "./socket"
     return old.apply(this, arguments);
   };
 })($.fn.attr);
+
 
 //////////////////////////////////
 // Setup Unpoly
@@ -68,14 +70,9 @@ import hljs from "highlight.js";
 up.compiler("pre code", function ($blocks) {
   $blocks.each(function(i, block) {
     hljs.highlightBlock(block);
-  })
+  });
 });
 
-
-//   console.log($element);
-//   // $.each($elements, e => console.log("HIGHLIGHT", e));
-//   // hljs.highlightBlock($element);
-// });
 
 //////////////////////////////////
 // Setup clipboard
@@ -86,10 +83,6 @@ import Clipboard from "clipboard";
 var clipboard = new Clipboard('button#clipboard');
 
 clipboard.on('success', function(e) {
-    // console.info('Action:', e.action);
-    // console.info('Text:', e.text);
-    // console.info('Trigger:', e.trigger);
-
   setTimeout( () => e.clearSelection(), 200 );
 });
 
@@ -98,25 +91,32 @@ clipboard.on('success', function(e) {
 // Setup Editor
 //////////////////////////////////
 
+function pushEditor() {
+  var code = editor.getValue();
+
+  channel.push("presto", {
+    event: "editor_changed",
+    content: editor.getValue()
+  });
+}  
+
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/html");
 
-editor.getSession().on('change', function(e) {
-  console.log(e);
-});
-
-editor.getSession().selection.on('changeSelection', function(e) {
-  console.log(e);
-});
-
-editor.getSession().selection.on('changeCursor', function(e) {
-  console.log(e);
+editor.on("change", function(e) {
+  // https://github.com/ajaxorg/ace/issues/503
+  if (editor.curOp && editor.curOp.command.name) {
+    console.log("user change");
+    pushEditor();
+  } else {
+    console.log("other change");
+  }
 });
 
 
 //////////////////////////////////
-// Setup Proactive callbacks
+// Setup Presto
 //////////////////////////////////
 
 up.on('up:fragment:keep', function(event) {
@@ -148,7 +148,11 @@ function applyPresto(message) {
   switch (action) {
     case "extract": {
       var {selector, html} = data;
+
+      var focused = document.activeElement;
       up.extract(selector, html);
+      $(focused).focus();
+
       break;
     }
     default: {
@@ -162,7 +166,9 @@ function applyEditor(message) {
 
   switch (action) {
     case "update_editor": {
-      editor.setValue(data, -1); // moves cursor to the start
+      if (editor.getValue() != data) {
+        editor.setValue(data); //, -1); // moves cursor to the start
+      }
       break;
     }
     default: {
