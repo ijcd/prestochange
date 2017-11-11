@@ -47,6 +47,8 @@ defmodule PrestoChange.Mixfile do
       {:credo, "~> 0.4", only: [:dev, :test]},
       {:dialyxir, "~> 0.4", only: [:dev, :test]},
       {:ex_doc, "~> 0.14", only: :dev, runtime: false},      
+
+      {:distillery, "~> 1.5", runtime: false},      
     ]
   end
 end

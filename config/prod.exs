@@ -15,8 +15,12 @@ use Mix.Config
 # which you typically run after static files are built.
 config :presto_change, PrestoChangeWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  http: [port: {:system, "PORT"}],
+  url: [host: {:system, "HOST"}, port: {:system, "PORT"}], # This is critical for ensuring web-sockets properly authorize.
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true,
+  root: ".",
+  version: Application.spec(:presto_change, :vsn)
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -61,4 +65,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"

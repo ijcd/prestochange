@@ -1,0 +1,28 @@
+Dockerfile
+.dockerignore
+
+.git
+_build
+cover
+deps
+doc
+test
+tmp
+erl_crash.dump
+*.ez
+
+# added for phoenix
+priv/static
+assets/node_modules
+
+# added for emacs
+GPATH
+GRTAGS
+GTAGS
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+.git
+.gitignore
+
+.dev_erlang_cookie.txt

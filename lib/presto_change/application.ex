@@ -6,6 +6,9 @@ defmodule PrestoChange.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
+    IO.inspect(Application.get_all_env(:presto_change), label: "CONFIG")
+    IO.inspect(System.get_env(), label: "ENV")
+
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
