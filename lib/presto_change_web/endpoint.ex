@@ -48,12 +48,14 @@ defmodule PrestoChangeWeb.Endpoint do
   """
   def init(_key, config) do
     if config[:load_from_system_env] do
-      host = System.get_env("HOST") || raise "expected the HOST environment variable to be set"
       port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
+      url_host = System.get_env("URL_HOST") || raise "expected the URL_HOST environment variable to be set"
+      url_port = System.get_env("URL_PORT") || raise "expected the URL_PORT environment variable to be set"
       config =
         config
         |> Keyword.put(:http, [:inet6, port: port])
-        |> Keyword.put(:url, [host: host, port: port])
+        |> Keyword.put(:url, [host: url_host, port: url_port])
+        |> IO.inspect
 
       {:ok, config}
     else

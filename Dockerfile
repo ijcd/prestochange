@@ -94,8 +94,7 @@ EXPOSE 5000
 
 ENV MIX_ENV=prod \
     REPLACE_OS_VARS=true \
-    PORT=5000 \
-    HOST=prestochange.io
+    PORT=5000
 
 # USER nobody
 

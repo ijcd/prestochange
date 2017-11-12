@@ -1,5 +1,6 @@
 Dockerfile
 .dockerignore
+.env
 
 .git
 _build

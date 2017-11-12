@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    port: 5000
+    environment:
+      - URL_HOST
+      - URL_PORT
