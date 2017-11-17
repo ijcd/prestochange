@@ -2,6 +2,7 @@ services:
   web:
     build: .
     port: 5000
+    domain: ${URL_HOST}
     environment:
       - URL_HOST
       - URL_PORT
