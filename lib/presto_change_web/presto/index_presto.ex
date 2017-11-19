@@ -2,7 +2,7 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
   use Taggart
   alias PrestoChange.Converter
   alias PrestoChange.Snippets
-  
+
   require Logger
 
   @indent_2 Converter.Indent.Spaces.new(2)
@@ -121,9 +121,9 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
               state.output
             end
           end
-          # button(id: "clipboard", class: "copy-button", "data-clipboard-target": "#output") do
-          #   "Copy"
-          # end
+      	  button(id: "clipboard", class: "copy-button", "data-clipboard-target": "#output") do
+      	    "Copy"
+      	  end
         end
       end
     end
