@@ -38,17 +38,17 @@ defmodule PrestoChange.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:algae, "~> 1.1"},      
+      {:algae, "~> 1.1"},
 
-      {:taggart, github: "ijcd/taggart", branch: "ijcd-content_tag_as_macro"},
+      {:taggart, github: "ijcd/taggart"},
       {:floki, "~> 0.17.0"},
 
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:credo, "~> 0.4", only: [:dev, :test]},
       {:dialyxir, "~> 0.4", only: [:dev, :test]},
-      {:ex_doc, "~> 0.14", only: :dev, runtime: false},      
+      {:ex_doc, "~> 0.14", only: :dev, runtime: false},
 
-      {:distillery, "~> 1.5", runtime: false},      
+      {:distillery, "~> 1.5", runtime: false},
     ]
   end
 end

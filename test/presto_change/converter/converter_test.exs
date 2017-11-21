@@ -2,7 +2,6 @@ defmodule PrestoChange.ConverterTest do
   use ExUnit.Case
 
   alias PrestoChange.Converter
-  alias PrestoChange.Snippets
   # doctest Converter
 
   test "has a PageState struct with defaults" do

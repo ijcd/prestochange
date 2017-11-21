@@ -55,7 +55,6 @@ defmodule PrestoChangeWeb.Endpoint do
         config
         |> Keyword.put(:http, [:inet6, port: port])
         |> Keyword.put(:url, [host: url_host, port: url_port])
-        |> IO.inspect
 
       {:ok, config}
     else
