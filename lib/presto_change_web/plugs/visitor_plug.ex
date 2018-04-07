@@ -12,6 +12,7 @@ defmodule PrestoChangeWeb.Plugs.VisitorPlug do
       assign(conn, @key, visitor_id)
     else
       visitor_id = Base.encode64(:crypto.strong_rand_bytes(32))
+
       conn
       |> put_session(@key, visitor_id)
       |> assign(@key, visitor_id)

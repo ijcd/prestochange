@@ -4,10 +4,10 @@ defmodule PrestoChangeWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PrestoChangeWeb.RoomChannel
-  channel "page:*", PrestoChangeWeb.PageChannel
-  
+  channel("page:*", PrestoChangeWeb.PageChannel)
+
   ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
+  transport(:websocket, Phoenix.Transports.WebSocket)
   # transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can
@@ -25,6 +25,7 @@ defmodule PrestoChangeWeb.UserSocket do
     case Session.decode_socket_token(token) do
       {:ok, visitor_id} ->
         {:ok, assign(socket, :visitor_id, visitor_id)}
+
       {:error, reason} ->
         :error
     end

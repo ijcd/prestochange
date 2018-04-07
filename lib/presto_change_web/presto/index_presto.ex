@@ -23,20 +23,26 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
         %{"element" => "button", "event" => "click", "attrs" => %{"id" => id}} = e ->
           case id do
             "a" ->
-              {Converter.update_input(state, Snippets.a), true}
+              {Converter.update_input(state, Snippets.a()), true}
+
             "ul" ->
-              {Converter.update_input(state, Snippets.ul), true}
+              {Converter.update_input(state, Snippets.ul()), true}
+
             "hello" ->
-              {Converter.update_input(state, Snippets.hello), true}
+              {Converter.update_input(state, Snippets.hello()), true}
+
             "bootstrap" ->
-              {Converter.update_input(state, Snippets.bootstrap_navbar), true}
+              {Converter.update_input(state, Snippets.bootstrap_navbar()), true}
+
             "zurb" ->
-              {Converter.update_input(state, Snippets.zurb_topbar), true}
+              {Converter.update_input(state, Snippets.zurb_topbar()), true}
 
             "spaces_2" ->
               {Converter.update_indent(state, @indent_2), true}
+
             "spaces_4" ->
               {Converter.update_indent(state, @indent_4), true}
+
             "tabs" ->
               {Converter.update_indent(state, @indent_t), true}
 
@@ -96,6 +102,7 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
           #   <option>HTML to Haml</option>
           # </select>
         end
+
         div(class: "uk-width-1-2") do
           "Converted output will appear here"
         end
@@ -106,7 +113,6 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
   def render_workspace(state) do
     section(id: "code", class: "uk-height-1-1") do
       div(class: "uk-grid-collapse uk-grid uk-height-1-1", "uk-grid": true) do
-
         # left panel
         div(class: "uk-width-1-2") do
           div(id: "editor", class: "uk-height-1-1", "up-keep": true) do
@@ -121,9 +127,10 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
               state.output
             end
           end
-      	  button(id: "clipboard", class: "copy-button", "data-clipboard-target": "#output") do
-      	    "Copy"
-      	  end
+
+          button(id: "clipboard", class: "copy-button", "data-clipboard-target": "#output") do
+            "Copy"
+          end
         end
       end
     end
@@ -134,18 +141,66 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
       div(class: "uk-grid-collapse uk-grid", "uk-grid": true) do
         div(class: "uk-width-1-2") do
           "Snippets:"
-          button("a", id: "a", class: "uk-button uk-button-small uk-button-secondary", presto: true)
-          button("ul", id: "ul", class: "uk-button uk-button-small uk-button-secondary", presto: true)
-          button("hello world", id: "hello", class: "uk-button uk-button-small uk-button-secondary", presto: true)
-          button("bootstrap navbar", id: "bootstrap", class: "uk-button uk-button-small uk-button-secondary", presto: true)
-          button("zurb topbar", id: "zurb", class: "uk-button uk-button-small uk-button-secondary", presto: true)
+
+          button(
+            "a",
+            id: "a",
+            class: "uk-button uk-button-small uk-button-secondary",
+            presto: true
+          )
+
+          button(
+            "ul",
+            id: "ul",
+            class: "uk-button uk-button-small uk-button-secondary",
+            presto: true
+          )
+
+          button(
+            "hello world",
+            id: "hello",
+            class: "uk-button uk-button-small uk-button-secondary",
+            presto: true
+          )
+
+          button(
+            "bootstrap navbar",
+            id: "bootstrap",
+            class: "uk-button uk-button-small uk-button-secondary",
+            presto: true
+          )
+
+          button(
+            "zurb topbar",
+            id: "zurb",
+            class: "uk-button uk-button-small uk-button-secondary",
+            presto: true
+          )
         end
 
         div(class: "uk-width-1-2") do
           "Indent spaces:"
-          button(2, id: "spaces_2", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_2), presto: true)
-          button(4, id: "spaces_4", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_4), presto: true)
-          button("tabs", id: "tabs", class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_t), presto: true)
+
+          button(
+            2,
+            id: "spaces_2",
+            class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_2),
+            presto: true
+          )
+
+          button(
+            4,
+            id: "spaces_4",
+            class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_4),
+            presto: true
+          )
+
+          button(
+            "tabs",
+            id: "tabs",
+            class: "uk-button uk-button-small uk-button-secondary " <> activeIf(state, @indent_t),
+            presto: true
+          )
         end
       end
     end

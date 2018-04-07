@@ -15,7 +15,6 @@ defmodule Presto.Supervisor do
   require Logger
 
   @page_registry_name Registry.Presto.Page
-  
 
   @doc """
   Starts the supervisor.
@@ -26,12 +25,14 @@ defmodule Presto.Supervisor do
 
   @doc false
   def init(_arg) do
-    Supervisor.init([
-      Supervisor.child_spec(Presto.Page, start: {Presto.Page, :start_link, []})
-    ], strategy: :simple_one_for_one)
+    Supervisor.init(
+      [
+        Supervisor.child_spec(Presto.Page, start: {Presto.Page, :start_link, []})
+      ],
+      strategy: :simple_one_for_one
+    )
   end
 
-  
   @doc """
 
   Will find the process identifier (in our case, the `page_id`) if
@@ -52,7 +53,6 @@ defmodule Presto.Supervisor do
     end
   end
 
-
   @doc """
   Determines if a `Presto.Page` process exists, based on the `page_id`
   provided.  Returns a boolean.
@@ -70,7 +70,6 @@ defmodule Presto.Supervisor do
     end
   end
 
-
   @doc """
   Creates a new page process, based on the `page_id` integer.  Returns
   a tuple such as `{:ok, page_id}` if successful.  If there is an
@@ -84,7 +83,6 @@ defmodule Presto.Supervisor do
     end
   end
 
-
   @doc """
   Returns the count of `Presto.Page` processes managed by this supervisor.
 
@@ -96,7 +94,6 @@ defmodule Presto.Supervisor do
   """
   def page_process_count, do: Supervisor.which_children(__MODULE__) |> length
 
-
   @doc """
   Return a list of `page_id` integers known by the registry.
   ex - `[1, 23, 46]`
@@ -105,8 +102,8 @@ defmodule Presto.Supervisor do
     Supervisor.which_children(__MODULE__)
     |> Enum.map(fn {_, page_proc_pid, _, _} ->
       Registry.keys(@page_registry_name, page_proc_pid)
-      |> List.first
+      |> List.first()
     end)
-    |> Enum.sort
+    |> Enum.sort()
   end
 end
