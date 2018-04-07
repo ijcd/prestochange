@@ -1,5 +1,7 @@
 defmodule PrestoChangeWeb.Presto.IndexPresto do
-  use Taggart
+  @moduledoc false
+
+  use Taggart.HTML
   alias PrestoChange.Converter
   alias PrestoChange.Snippets
 
