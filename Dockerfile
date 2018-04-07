@@ -4,7 +4,7 @@
 # Build Stage
 ###############################
 
-FROM elixir:1.5.2-slim as builder
+FROM elixir:1.6-slim as builder
 
 # build packages
 RUN echo 'deb http://httpredir.debian.org/debian jessie-backports main contrib non-free' >> /etc/apt/sources.list
@@ -49,7 +49,7 @@ ADD priv priv
 ADD assets assets
 RUN cd assets && yarn
 RUN cd assets && ./node_modules/brunch/bin/brunch build --production
-RUN mix phoenix.digest
+RUN mix phx.digest
 
 # add the rest
 ADD . .
