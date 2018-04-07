@@ -5,10 +5,10 @@ defmodule PrestoChange.Mixfile do
     [
       app: :presto_change,
       version: "0.0.1",
-      elixir: "~> 1.4",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixir: "~> 1.5",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
   end
@@ -25,7 +25,7 @@ defmodule PrestoChange.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
@@ -39,16 +39,13 @@ defmodule PrestoChange.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:algae, "~> 1.1"},
-
-      {:taggart, github: "ijcd/taggart"},
-      {:floki, "~> 0.17.0"},
-
+      {:taggart, "~> 0.1"},
+      {:floki, "~> 0.20"},
       {:mix_test_watch, "~> 0.2", only: :dev},
-      {:credo, "~> 0.4", only: [:dev, :test]},
-      {:dialyxir, "~> 0.4", only: [:dev, :test]},
-      {:ex_doc, "~> 0.14", only: :dev, runtime: false},
-
-      {:distillery, "~> 1.5", runtime: false},
+      {:credo, "~> 0.9", only: [:dev, :test]},
+      {:dialyxir, "~> 0.5", only: [:dev, :test]},
+      {:ex_doc, "~> 0.18", only: :dev, runtime: false},
+      {:distillery, "~> 1.5", runtime: false}
     ]
   end
 end
