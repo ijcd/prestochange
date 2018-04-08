@@ -2,7 +2,9 @@ services:
   web:
     build: .
     port: 5000
-    domain: ${URL_HOST}
+    domain:
+      - www.prestochange.io
+      - eu.prestochange.io
     environment:
       - URL_HOST
       - URL_PORT
