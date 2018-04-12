@@ -1,8 +1,3 @@
-window.nodeRequire = require;
-delete window.require;
-delete window.exports;
-delete window.module;
-
 // Brunch automatically concatenates all files in your
 // watched paths. Those paths can be configured at
 // config.paths.watched in "brunch-config.js".
@@ -145,7 +140,6 @@ up.log.disable();    // TODO: make specific to the environment?
 //   console.log("kept", event);
 // });
 
-// TODO: Organize event handling better.
 // TODO: How do we bind document or page-level events?
 // https://stackoverflow.com/questions/9368538/getting-an-array-of-all-dom-events-possible
 var allEventNames = Object.getOwnPropertyNames(document).concat(Object.getOwnPropertyNames(Object.getPrototypeOf(Object.getPrototypeOf(document)))).concat(Object.getOwnPropertyNames(Object.getPrototypeOf(window))).filter(function(i){return !i.indexOf("on")&&(document[i]==null||typeof document[i]=="function");}).filter(function(elem, pos, self){return self.indexOf(elem) == pos;});
@@ -174,7 +168,13 @@ channel.on("presto", payload => {
 
   switch (name) {
     case "update_component": {
+      // preprocess hook
+      if (typeof prestoPreHook === 'function') {
+        payload = prestoPreHook(payload);
+      }
+
       var {component_id: component_id, content: content} = payload;
+
 
       var focused = document.activeElement;
       up.extract("#" + component_id, content);
