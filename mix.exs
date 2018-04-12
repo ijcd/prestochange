@@ -38,9 +38,14 @@ defmodule PrestoChange.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+
+      # tags and data
       {:algae, "~> 1.1"},
       {:taggart, "~> 0.1"},
+      # {:presto, "~> 0.1"},
       {:floki, "~> 0.20"},
+
+      # dev and test
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:credo, "~> 0.9", only: [:dev, :test]},
       {:dialyxir, "~> 0.5", only: [:dev, :test]},

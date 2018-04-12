@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-  <script>window.userToken = "<%= assigns[:user_token] %>";</script>  
+  <script>window.userToken = "<%= assigns[:user_token] %>";</script>
 
   <title>Hello PrestoChange!</title>
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
@@ -25,12 +25,12 @@
           </a>
         </h1>
       </section>
-        
+
       <section id="nav_center">
       </section>
 
       <section id="nav_right">
-      </section>            
+      </section>
     </nav>
   </header>
 
@@ -54,7 +54,11 @@
   <% end %>
 
   <main uk-height-viewport="expand: true">
-    <%= render @view_module, @view_template, assigns %>
+    <%= if assigns[:presto_content] do %>
+      <%= @presto_content %>
+    <%= else %>
+      <%= render @view_module, @view_template, assigns %>
+    <% end %>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.2.8/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>

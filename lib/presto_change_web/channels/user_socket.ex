@@ -1,6 +1,6 @@
 defmodule PrestoChangeWeb.UserSocket do
   use Phoenix.Socket
-  alias PrestoChange.Session
+  alias PrestoChangeWeb.Session
 
   ## Channels
   # channel "room:*", PrestoChangeWeb.RoomChannel
@@ -26,7 +26,7 @@ defmodule PrestoChangeWeb.UserSocket do
       {:ok, visitor_id} ->
         {:ok, assign(socket, :visitor_id, visitor_id)}
 
-      {:error, reason} ->
+      {:error, _reason} ->
         :error
     end
   end

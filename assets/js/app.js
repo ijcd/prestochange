@@ -50,7 +50,7 @@ function setCodeHeight() {
   var header_height = $("#header").height();
   var controls_height = $("#controls").height();
   var helpers_height = $("#helpers").height();
-  
+
   $("#code").height(window_height - header_height - controls_height - helpers_height - 8);
 }
 
@@ -58,14 +58,6 @@ $(document).ready(function() {
   $(window).resize(setCodeHeight);
   setCodeHeight();
 });
-
-//////////////////////////////////
-// Setup Unpoly
-//////////////////////////////////
-
-import unpoly from "unpoly/dist/unpoly.js"
-up.log.enable();    // TODO: make specific to the environment?
-
 
 //////////////////////////////////
 // Setup UIKit
@@ -93,9 +85,9 @@ up.compiler("pre code", function ($blocks) {
 
 import Clipboard from "clipboard";
 
-var clipboard = new Clipboard('button#clipboard');
+var clipboard = new Clipboard("button#clipboard");
 
-clipboard.on('success', function(e) {
+clipboard.on("success", function(e) {
   setTimeout( () => e.clearSelection(), 200 );
 });
 
@@ -111,91 +103,94 @@ function pushEditor() {
     event: "editor_changed",
     content: editor.getValue()
   });
-}  
+}
 
 var editor = ace.edit("editor");
+editor.$blockScrolling = Infinity
 editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/html");
 
 editor.on("change", function(e) {
   // https://github.com/ajaxorg/ace/issues/503
   if (editor.curOp && editor.curOp.command.name) {
-    console.log("user change");
+    // console.log("user change");
     pushEditor();
   } else {
-    console.log("other change");
+    // console.log("other change");
   }
 });
+
+//////////////////////////////////
+// Setup Unpoly
+//////////////////////////////////
+
+import unpoly from "unpoly/dist/unpoly.js"
+// up.log.enable();    // TODO: make specific to the environment?
+up.log.disable();    // TODO: make specific to the environment?
 
 
 //////////////////////////////////
 // Setup Presto
 //////////////////////////////////
 
-up.on('up:fragment:keep', function(event) {
-  console.log("keep", event);
-});
+// up.on("up:fragment:keep", function(event) {
+//   console.log("keep", event);
+// });
+//
+// up.on("up:fragment:kept", function(event) {
+//   console.log("kept", event);
+// });
 
-up.on('up:fragment:keet', function(event) {
-  console.log("kept", event);
-});
+// TODO: Organize event handling better.
+// TODO: How do we bind document or page-level events?
+// https://stackoverflow.com/questions/9368538/getting-an-array-of-all-dom-events-possible
+var allEventNames = Object.getOwnPropertyNames(document).concat(Object.getOwnPropertyNames(Object.getPrototypeOf(Object.getPrototypeOf(document)))).concat(Object.getOwnPropertyNames(Object.getPrototypeOf(window))).filter(function(i){return !i.indexOf("on")&&(document[i]==null||typeof document[i]=="function");}).filter(function(elem, pos, self){return self.indexOf(elem) == pos;});
 
-up.compiler('button[presto]', function($button) {
-  $button.on('click', function(event) {
-    event.preventDefault();
+function prestoPush(eventName, $el) {
+  channel.push("presto", {
+    element: $el.prop('tagName'),
+    event: eventName,
+    attrs: $el.attr(),
+    id: $el.prop('id')
+  });
+}
 
-    $button = $(event.target);
-
-    channel.push("presto", {
-      event: "click",
-      element: "button",
-      attrs: $button.attr(),
-      text: $button.text()
-    });
+// Attach a delegated event handler
+allEventNames.forEach(function(eventName) {
+  var eventName = eventName.replace(/^on/, "");
+  $("body").on(eventName, ".presto-" + eventName, function(event) {
+    var $el = $(this);
+    $el = $(event.target);
+    prestoPush(eventName, $el);
   });
 });
 
-function applyPresto(message) {
-  var {action, data} = message;
+channel.on("presto", payload => {
+  var {name: name} = payload;
 
-  switch (action) {
-    case "extract": {
-      var {selector, html} = data;
+  switch (name) {
+    case "update_component": {
+      var {component_id: component_id, content: content} = payload;
 
       var focused = document.activeElement;
-      up.extract(selector, html);
+      up.extract("#" + component_id, content);
       $(focused).focus();
+
+      if (typeof prestoPostHook === 'function') {
+        prestoPostHook(payload);
+      }
 
       break;
     }
-    default: {
-      console.log("Unknown message", message);
-    }
+  }
+});
+
+function prestoPostHook(payload) {
+  var input = $("#editor_shadow_input").text()
+
+  if (editor.getValue() != input) {
+    editor.setValue(input, -1); // moves cursor to the start
   }
 
   setCodeHeight();
 }
-
-function applyEditor(message) {
-  var {action, data} = message;
-
-  switch (action) {
-    case "update_editor": {
-      if (editor.getValue() != data) {
-        editor.setValue(data); //, -1); // moves cursor to the start
-      }
-      break;
-    }
-    default: {
-      console.log("Unknown message", message);
-    }
-  }
-}
-
-channel.on("presto", payload => {
-  var {presto: presto_actions = []} = payload;
-  presto_actions.map(p => applyPresto(p));
-
-  var {editor: editor_actions = []} = payload;  
-  editor_actions.map(p => applyEditor(p));  
-});

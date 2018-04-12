@@ -1,6 +1,5 @@
 defmodule PrestoChange.Converter do
   alias Taggart.Convert.HTMLToTaggart
-  alias PrestoChange.Snippets
 
   import Algae
 

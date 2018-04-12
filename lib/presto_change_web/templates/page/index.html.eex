@@ -1,0 +1,1 @@
+<%= Presto.component(PrestoChangeWeb.Presto.IndexPresto, assigns[:visitor_id]) %>

@@ -1,4 +1,4 @@
-defmodule PrestoChange.Session do
+defmodule PrestoChangeWeb.Session do
   def encode_socket_token(visitor_id) do
     Phoenix.Token.sign(PrestoChangeWeb.Endpoint, "user", visitor_id)
   end

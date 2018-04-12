@@ -1,4 +1,4 @@
-defmodule PrestoChangeWeb.Plugs.VisitorPlug do
+defmodule PrestoChangeWeb.Plugs.VisitorIdPlug do
   import Plug.Conn
 
   @key :visitor_id
