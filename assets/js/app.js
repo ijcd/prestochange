@@ -1,3 +1,8 @@
+window.nodeRequire = require;
+delete window.require;
+delete window.exports;
+delete window.module;
+
 // Brunch automatically concatenates all files in your
 // watched paths. Those paths can be configured at
 // config.paths.watched in "brunch-config.js".
@@ -19,7 +24,6 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import {socket, channel} from "./socket"
-
 
 //////////////////////////////////
 // Extend jQuery with attr()

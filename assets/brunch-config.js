@@ -52,6 +52,12 @@ exports.config = {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
     },
+    replacement: {
+      replacements: [{
+        files: [/\.js$/],
+	match: {find: /(?!_)\b(require)(?!_|d)/gm, replace: 'MY_REQUIRE'}
+      }]
+    },
     sass: {
       options: {
         includePaths: ["node_modules"]
