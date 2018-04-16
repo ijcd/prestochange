@@ -48,7 +48,8 @@ RUN mix deps.compile
 ADD priv priv
 ADD assets assets
 RUN cd assets && yarn
-RUN cd assets && ./node_modules/brunch/bin/brunch build --production
+#RUN cd assets && ./node_modules/brunch/bin/brunch build --production
+RUN cd assets && ./node_modules/brunch/bin/brunch build
 RUN mix phx.digest
 
 # add the rest
