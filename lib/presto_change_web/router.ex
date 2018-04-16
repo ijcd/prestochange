@@ -20,7 +20,7 @@ defmodule PrestoChangeWeb.Router do
     pipe_through(:browser)
 
     get("/", PageController, :index)
-    # forward("/", Presto.IndexPresto)
+    # forward("/", Presto.Root)
   end
 
   # Other scopes may use custom stacks.

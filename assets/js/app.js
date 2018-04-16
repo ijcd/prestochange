@@ -21,28 +21,24 @@ import "phoenix_html"
 import {socket, channel} from "./socket"
 
 //////////////////////////////////
-// Extend jQuery with attr()
+// Setup Unpoly
 //////////////////////////////////
 
-(function(old) {
-  $.fn.attr = function() {
-    if(arguments.length === 0) {
-      if(this.length === 0) {
-        return null;
-      }
+import unpoly from "unpoly/dist/unpoly.js"
+// up.log.enable();    // TODO: make specific to the environment?
+up.log.disable();    // TODO: make specific to the environment?
 
-      var obj = {};
-      $.each(this[0].attributes, function() {
-        if(this.specified) {
-          obj[this.name] = this.value;
-        }
-      });
-      return obj;
-    }
+//////////////////////////////////
+// Setup Presto
+//////////////////////////////////
 
-    return old.apply(this, arguments);
-  };
-})($.fn.attr);
+import {Presto} from "presto"
+let presto = new Presto(channel, up);
+
+
+//////////////////////////////////
+// Adjust code height on change
+//////////////////////////////////
 
 function setCodeHeight() {
   var window_height = $(window).height();
@@ -119,77 +115,7 @@ editor.on("change", function(e) {
   }
 });
 
-//////////////////////////////////
-// Setup Unpoly
-//////////////////////////////////
-
-import unpoly from "unpoly/dist/unpoly.js"
-// up.log.enable();    // TODO: make specific to the environment?
-up.log.disable();    // TODO: make specific to the environment?
-
-
-//////////////////////////////////
-// Setup Presto
-//////////////////////////////////
-
-// up.on("up:fragment:keep", function(event) {
-//   console.log("keep", event);
-// });
-//
-// up.on("up:fragment:kept", function(event) {
-//   console.log("kept", event);
-// });
-
-// TODO: How do we bind document or page-level events?
-// https://stackoverflow.com/questions/9368538/getting-an-array-of-all-dom-events-possible
-var allEventNames = Object.getOwnPropertyNames(document).concat(Object.getOwnPropertyNames(Object.getPrototypeOf(Object.getPrototypeOf(document)))).concat(Object.getOwnPropertyNames(Object.getPrototypeOf(window))).filter(function(i){return !i.indexOf("on")&&(document[i]==null||typeof document[i]=="function");}).filter(function(elem, pos, self){return self.indexOf(elem) == pos;});
-
-function prestoPush(eventName, $el) {
-  channel.push("presto", {
-    element: $el.prop('tagName'),
-    event: eventName,
-    attrs: $el.attr(),
-    id: $el.prop('id')
-  });
-}
-
-// Attach a delegated event handler
-allEventNames.forEach(function(eventName) {
-  var eventName = eventName.replace(/^on/, "");
-  $("body").on(eventName, ".presto-" + eventName, function(event) {
-    var $el = $(this);
-    $el = $(event.target);
-    prestoPush(eventName, $el);
-  });
-});
-
-channel.on("presto", payload => {
-  var {name: name} = payload;
-
-  switch (name) {
-    case "update_component": {
-      // preprocess hook
-      if (typeof prestoPreHook === 'function') {
-        payload = prestoPreHook(payload);
-      }
-
-      var {component_id: component_id, content: content} = payload;
-
-
-      var focused = document.activeElement;
-      up.extract("#" + component_id, content);
-      $(focused).focus();
-
-      if (typeof prestoPostHook === 'function') {
-        prestoPostHook(payload);
-      }
-
-      break;
-    }
-  }
-});
-
-function prestoPostHook(payload) {
+presto.onPostUpdate(function(payload) {
   var input = $("#editor_shadow_input").text()
 
   if (editor.getValue() != input) {
@@ -197,4 +123,4 @@ function prestoPostHook(payload) {
   }
 
   setCodeHeight();
-}
+});

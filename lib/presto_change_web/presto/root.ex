@@ -1,4 +1,4 @@
-defmodule PrestoChangeWeb.Presto.IndexPresto do
+defmodule PrestoChangeWeb.Presto.Root do
   @moduledoc false
 
   use Presto.Page
@@ -15,12 +15,6 @@ defmodule PrestoChangeWeb.Presto.IndexPresto do
   @impl Presto.Page
   def initial_model(_model) do
     Converter.new()
-  end
-
-  @impl Presto.Page
-  def index(assigns) do
-    assigns = Map.put(assigns, :presto_content, super(assigns))
-    PrestoChangeWeb.LayoutView.render("app.html", assigns)
   end
 
   @impl Presto.Page

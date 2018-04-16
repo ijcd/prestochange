@@ -10,13 +10,12 @@ defmodule PrestoChange.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
-      {PrestoChangeWeb.Endpoint, []},
+      {PrestoChangeWeb.Endpoint, []}
       # Start your own worker by calling: PrestoChange.Worker.start_link(arg1, arg2, arg3)
       # worker(PrestoChange.Worker, [arg1, arg2, arg3]),
 
-      # TODO: remove when symlink removed
-      {Registry, keys: :unique, name: Presto.PageRegistry},
-      {Presto.PageSupervisor, []}
+      # {Registry, keys: :unique, name: Presto.PageRegistry},
+      # {Presto.PageSupervisor, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

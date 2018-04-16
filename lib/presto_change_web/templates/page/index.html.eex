@@ -1,1 +1,1 @@
-<%= Presto.component(PrestoChangeWeb.Presto.IndexPresto, assigns[:visitor_id]) %>
+<%= Presto.component(PrestoChangeWeb.Presto.Root, assigns[:visitor_id]) %>

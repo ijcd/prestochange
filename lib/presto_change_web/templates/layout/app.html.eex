@@ -54,11 +54,7 @@
   <% end %>
 
   <main uk-height-viewport="expand: true">
-    <%= if assigns[:presto_content] do %>
-      <%= @presto_content %>
-    <%= else %>
-      <%= render @view_module, @view_template, assigns %>
-    <% end %>
+    <%= render @view_module, @view_template, assigns %>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.2.8/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>

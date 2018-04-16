@@ -42,8 +42,12 @@ defmodule PrestoChange.Mixfile do
       # tags and data
       {:algae, "~> 1.1"},
       {:taggart, "~> 0.1"},
-      # {:presto, "~> 0.1"},
+      {:presto, "~> 0.1.2"},
       {:floki, "~> 0.20"},
+
+      # lenses
+      # {:focus, "~> 0.3.5"},
+      # {:lens, "~> 0.6.0"},
 
       # dev and test
       {:mix_test_watch, "~> 0.2", only: :dev},
