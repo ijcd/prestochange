@@ -119,7 +119,8 @@ presto.onPostUpdate(function(payload) {
   var input = $("#editor_shadow_input").text()
 
   if (editor.getValue() != input) {
-    editor.setValue(input, -1); // moves cursor to the start
+    editor.setValue(input); //, -1); // moves cursor to the start
+    editor.selection.clearSelection();
   }
 
   setCodeHeight();
