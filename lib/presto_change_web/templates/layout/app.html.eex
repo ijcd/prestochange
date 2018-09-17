@@ -57,6 +57,16 @@
     <%= render @view_module, @view_template, assigns %>
   </main>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125820282-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+        gtag('config', 'UA-125820282-1');
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.2.8/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
   <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
