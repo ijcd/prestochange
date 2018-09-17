@@ -62,12 +62,10 @@ defmodule PrestoChangeWeb.Presto.Root do
 
   @impl Presto.Page
   def render(model) do
-    div(class: "presto-component", id: "presto-component-12345") do
-      div(id: "converter", "uk-height-viewport": "expand: true") do
-        render_controls(model)
-        render_workspace(model)
-        render_helpers(model)
-      end
+    div(id: "converter", "uk-height-viewport": "expand: true") do
+      render_controls(model)
+      render_workspace(model)
+      render_helpers(model)
     end
   end
 

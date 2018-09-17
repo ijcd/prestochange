@@ -3,7 +3,6 @@ defmodule PrestoChangeWeb.UserSocket do
   alias PrestoChangeWeb.Session
 
   ## Channels
-  # channel "room:*", PrestoChangeWeb.RoomChannel
   channel("page:*", PrestoChangeWeb.PageChannel)
 
   ## Transports
